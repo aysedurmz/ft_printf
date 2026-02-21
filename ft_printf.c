@@ -42,6 +42,7 @@ int	ft_printf(const char *format, ...)
 	va_list	args;
 	int		i;
 	int		len;
+	int		tmp;
 
 	i = -1;
 	len = 0;
@@ -53,14 +54,18 @@ int	ft_printf(const char *format, ...)
 		if (format[i] == '%')
 		{
 			if (!format[++i])
-			{
-				len = -1;
-				break ;
-			}
-			len += ft_handle(args, format[i]);
+				tmp = -1;
+			else
+				tmp = ft_handle(args, format[i]);
 		}
 		else
-			len += ft_putchar(format[i]);
+			tmp = ft_putchar(format[i]);
+		if (tmp == -1)
+		{
+			len = -1;
+			break ;
+		}
+		len += tmp;
 	}
 	va_end(args);
 	return (len);

@@ -28,6 +28,7 @@ Compile your program with the library: `cc main.c libftprintf.a`
 ## Resources
 1. **Man pages**
 2. **AI**: Used for generating and formatting this README, as well as for assisting in testing the implemented functions.
+3. **[GeeksforGeeks](https://www.geeksforgeeks.org/) & [StackOverflow](https://stackoverflow.com/)**: Used to research and learn how the `<stdarg.h>` library and variadic functions work in C.
 
 
 
