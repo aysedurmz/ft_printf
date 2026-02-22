@@ -15,26 +15,30 @@
 
 static int	ft_handle(va_list args, char format)
 {
-	int	len;
+	int	tmp;
 
-	len = 0;
 	if (format == 'c')
-		len += ft_putchar(va_arg(args, int));
-	else if (format == 's')
-		len += ft_putstr(va_arg(args, char *));
-	else if (format == 'p')
-		len += ft_adress(va_arg(args, unsigned long));
-	else if (format == 'd' || format == 'i')
-		len += ft_putnbr(va_arg(args, int));
-	else if (format == 'u')
-		len += ft_putunsignednbr(va_arg(args, unsigned int));
-	else if (format == 'x')
-		len += ft_hexadecimal(va_arg(args, unsigned int), 0);
-	else if (format == 'X')
-		len += ft_hexadecimal(va_arg(args, unsigned int), 1);
-	else if (format == '%')
-		len += ft_putchar('%');
-	return (len);
+		return (ft_putchar(va_arg(args, int)));
+	if (format == 's')
+		return (ft_putstr(va_arg(args, char *)));
+	if (format == 'p')
+		return (ft_adress(va_arg(args, unsigned long)));
+	if (format == 'd' || format == 'i')
+		return (ft_putnbr(va_arg(args, int)));
+	if (format == 'u')
+		return (ft_putunsignednbr(va_arg(args, unsigned int)));
+	if (format == 'x')
+		return (ft_hexadecimal(va_arg(args, unsigned int), 0));
+	if (format == 'X')
+		return (ft_hexadecimal(va_arg(args, unsigned int), 1));
+	if (format == '%')
+		return (ft_putchar('%'));
+	if (ft_putchar('%') == -1)
+		return (-1);
+	tmp = ft_putchar(format);
+	if (tmp == -1)
+		return (-1);
+	return (tmp + 1);
 }
 
 static int	ft_process(va_list args, const char *format, int *i)
