@@ -13,7 +13,7 @@
 #include "ft_printf.h"
 #include <stdarg.h>
 
-int	ft_handle(va_list args, char format)
+static int	ft_handle(va_list args, char format)
 {
 	int	len;
 
@@ -37,6 +37,22 @@ int	ft_handle(va_list args, char format)
 	return (len);
 }
 
+static int	ft_process(va_list args, const char *format, int *i)
+{
+	int	tmp;
+
+	if (format[*i] == '%')
+	{
+		(*i)++;
+		if (!format[*i])
+			return (-1);
+		tmp = ft_handle(args, format[*i]);
+	}
+	else
+		tmp = ft_putchar(format[*i]);
+	return (tmp);
+}
+
 int	ft_printf(const char *format, ...)
 {
 	va_list	args;
@@ -44,28 +60,21 @@ int	ft_printf(const char *format, ...)
 	int		len;
 	int		tmp;
 
-	i = -1;
-	len = 0;
 	if (!format)
 		return (-1);
 	va_start(args, format);
-	while (format[++i])
+	i = 0;
+	len = 0;
+	while (format[i])
 	{
-		if (format[i] == '%')
-		{
-			if (!format[++i])
-				tmp = -1;
-			else
-				tmp = ft_handle(args, format[i]);
-		}
-		else
-			tmp = ft_putchar(format[i]);
+		tmp = ft_process(args, format, &i);
 		if (tmp == -1)
 		{
 			len = -1;
 			break ;
 		}
 		len += tmp;
+		i++;
 	}
 	va_end(args);
 	return (len);
