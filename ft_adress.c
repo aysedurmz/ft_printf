@@ -12,26 +12,6 @@
 
 #include "ft_printf.h"
 
-static int	ft_putptr_hex(unsigned long n)
-{
-	int		len;
-	char	*base;
-	int		tmp;
-
-	len = 0;
-	base = "0123456789abcdef";
-	if (n >= 16)
-	{
-		tmp = ft_putptr_hex(n / 16);
-		if (tmp == -1)
-			return (-1);
-		len += tmp;
-	}
-	if (ft_putchar(base[n % 16]) == -1)
-		return (-1);
-	return (len + 1);
-}
-
 int	ft_adress(unsigned long ptr)
 {
 	int	len;
@@ -44,7 +24,7 @@ int	ft_adress(unsigned long ptr)
 	if (tmp == -1)
 		return (-1);
 	len += tmp;
-	tmp = ft_putptr_hex(ptr);
+	tmp = ft_hexadecimal(ptr, 0);
 	if (tmp == -1)
 		return (-1);
 	len += tmp;
