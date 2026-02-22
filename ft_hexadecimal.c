@@ -12,11 +12,11 @@
 
 #include "ft_printf.h"
 
-int	ft_hexadecimal(unsigned int n, int upper)
+int	ft_hexadecimal(unsigned long n, int upper)
 {
 	int		len;
-	char	*base;
 	int		tmp;
+	char	*base;
 
 	len = 0;
 	if (upper == 1)
